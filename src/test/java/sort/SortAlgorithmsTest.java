@@ -7,6 +7,9 @@ import org.junit.jupiter.api.TestInstance;
 import java.util.Arrays;
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * TestInstance permet de lancer les tests en créant un objet (test classe) et d'éviter les déclarations statiques.
+ */
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class SortAlgorithmsTest {
     SortAlgorithms sa = new SortAlgorithms();

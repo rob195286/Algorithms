@@ -19,13 +19,12 @@ class SortAlgorithmsTest {
     Random randInt = new Random();
     int[] array1;
     int[] array2;
-    int[] array3;
-    int[] array4 = new int[arraySize];
-    int[] arrayToCompareWith1;
-    int[] arrayToCompareWith2;
-    int[] arrayToCompareWith4 = new int[arraySize];
-    int[] arrayConcatenated;
-    int[] arrayConcatenatedToCompareWith;
+    int[] array3 = new int[arraySize];
+    int[] array1_2;
+    int[] array1ToCompareWith;
+    int[] array2ToCompareWith;
+    int[] array3ToCompareWith = new int[arraySize];
+    int[] array1_2ToCompareWith;
 
     @BeforeAll
     public void setup(){
@@ -33,46 +32,39 @@ class SortAlgorithmsTest {
     @BeforeEach
     public void resetState(){
         array1 = new int[]{2, 6, 9, 8, 11, 23, 65, 89, 14, 47, 85};
-        arrayToCompareWith1 = array1.clone();
-        Arrays.sort(arrayToCompareWith1);
-        array2 = new int[]{4, 8, 12, 13, 14};
-        array3 = new int[]{1, 2, 6, 8, 9, 10};
+        array2 = new int[]{0, 89, 18, 4, 8, 12, 13, 14, 21, 35, 64};
         for (int i = 0; i < arraySize; i++){
-            array4[i] = randInt.nextInt();
+            array3[i] = randInt.nextInt();
         }
-        arrayToCompareWith2 = array2.clone();
-        arrayToCompareWith4 = array4;
-        Arrays.sort(arrayToCompareWith1);
+        array1_2 = new int[array1.length + array2.length];
+        array1_2ToCompareWith = new int[array1.length + array2.length];
+        array1ToCompareWith = array1.clone();
+        array2ToCompareWith = array2.clone();
+        array3ToCompareWith = array3.clone();
+        Arrays.sort(array1ToCompareWith);
+        Arrays.sort(array2ToCompareWith);
+        Arrays.sort(array3ToCompareWith);
     }
 
     @Test
-    void insertionSort() {
+    void insertionSortTest() {
         sa.insertionSort(array1);
-        assertEquals(0, Arrays.compare(array1, arrayToCompareWith1));
-        sa.insertionSort(array4);
-        assertEquals(0, Arrays.compare(array4, arrayToCompareWith4));
+        assertEquals(0, Arrays.compare(array1, array1ToCompareWith));
+        sa.insertionSort(array2);
+        assertEquals(0, Arrays.compare(array2, array2ToCompareWith));
+        sa.insertionSort(array3);
+        assertEquals(0, Arrays.compare(array3, array3ToCompareWith));
     }
 
     @Test
-    void mergeSort() {
+    void mergeSortTest() {
+        Arrays.sort(array1);
         Arrays.sort(array2);
-        Arrays.sort(array3);
-        arrayConcatenated = new int[array2.length + array3.length];
-        System.arraycopy(array2, 0, arrayConcatenated, 0, array2.length);
-        System.arraycopy(array3, 0, arrayConcatenated, array2.length, array3.length);
-        arrayConcatenatedToCompareWith = arrayConcatenated.clone();
-        sa.mergeSort(arrayConcatenated);
-        Arrays.sort(arrayConcatenatedToCompareWith);
-        assertEquals(0, Arrays.compare(arrayConcatenatedToCompareWith, arrayConcatenated));
-        //------------------------------------------------------------------------------------------------
-        Arrays.sort(array3);
-        Arrays.sort(array4);
-        arrayConcatenated = new int[array3.length + array4.length];
-        System.arraycopy(array3, 0, arrayConcatenated, 0, array3.length);
-        System.arraycopy(array4, 0, arrayConcatenated, array3.length, array4.length);
-        arrayConcatenatedToCompareWith = arrayConcatenated.clone();
-        sa.insertionSort(arrayConcatenated);
-        Arrays.sort(arrayConcatenatedToCompareWith);
-        assertEquals(0, Arrays.compare(arrayConcatenatedToCompareWith, arrayConcatenated));
+        System.arraycopy(array1, 0, array1_2,0, array1.length);
+        System.arraycopy(array2, 0, array1_2, array1.length, array2.length);
+        array1_2ToCompareWith = array1_2.clone();
+        Arrays.sort(array1_2ToCompareWith);
+        sa.mergeSort(array1_2);
+        assertEquals(0, Arrays.compare(array1_2ToCompareWith, array1_2));
     }
 }

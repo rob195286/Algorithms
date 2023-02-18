@@ -1,4 +1,4 @@
-package sort;
+package sort_algorithms;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -58,13 +58,14 @@ class SortAlgorithmsTest {
 
     @Test
     void mergeSortTest() {
-        Arrays.sort(array1);
-        Arrays.sort(array2);
+        // TODO : mergesort, vérifier si c'est ok
         System.arraycopy(array1, 0, array1_2,0, array1.length);
         System.arraycopy(array2, 0, array1_2, array1.length, array2.length);
         array1_2ToCompareWith = array1_2.clone();
         Arrays.sort(array1_2ToCompareWith);
         sa.mergeSort(array1_2);
         assertEquals(0, Arrays.compare(array1_2ToCompareWith, array1_2));
+        sa.mergeSort(array3);
+        assertEquals(0, Arrays.compare(array3ToCompareWith, array3));
     }
 }

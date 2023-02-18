@@ -1,9 +1,11 @@
-package sort_algorithms;
+package sort_algorithms_tests;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
+import sort_algorithms.SortAlgorithms;
+
 import java.util.Arrays;
 import java.util.Random;
 
@@ -27,10 +29,10 @@ class SortAlgorithmsTest {
     int[] array1_2ToCompareWith;
 
     @BeforeAll
-    public void setup(){
+    public void initialisation(){
     }
     @BeforeEach
-    public void resetState(){
+    public void setUp(){
         array1 = new int[]{2, 6, 9, 8, 11, 23, 65, 89, 14, 47, 85};
         array2 = new int[]{0, 89, 18, 4, 8, 12, 13, 14, 21, 35, 64};
         for (int i = 0; i < arraySize; i++){

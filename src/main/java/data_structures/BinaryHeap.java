@@ -1,22 +1,42 @@
 package data_structures;
 
+
+import utilitarian.ExceptionsMessages;
+
 public class BinaryHeap {
     // Attribut indiquant le nombre d'élément actuel dans la structure où 0 est la racine.
-    public int size;
+    private int size = 0;
     private int[] array;
 
-    public BinaryHeap(int heapSize){
-
+    public BinaryHeap(int[] arrayToConvertIntoHeap, boolean buildMinOrMaxHeap){
+        this(arrayToConvertIntoHeap.length, buildMinOrMaxHeap);
+        this.array = arrayToConvertIntoHeap;
+        this.size = arrayToConvertIntoHeap.length;
+    }
+    public BinaryHeap(int heapSize, boolean minOrMaxHeap){
+        this.array = new int[heapSize];
     }
 
-    public int parent(int nodeToRetrieveParent){
-        return nodeToRetrieveParent>>1;
+    public int parent(int nodeIndexe){
+        if(nodeIndexe < 0)
+            throw new ArrayIndexOutOfBoundsException(ExceptionsMessages.INDEX_NODE_OUT_OF_BOUND + nodeIndexe);
+        return this.array[nodeIndexe>>1];
     }
-    public int leftChild(int nodeToRetrieveChild){
-        return 0;
+    public int leftChild(int nodeIndexe){
+        if(nodeIndexe < 0)
+            throw new ArrayIndexOutOfBoundsException(ExceptionsMessages.INDEX_NODE_OUT_OF_BOUND + nodeIndexe);
+        nodeIndexe = (++nodeIndexe<<1) - 1;
+        if(nodeIndexe > this.array.length)
+            throw new ArrayIndexOutOfBoundsException(ExceptionsMessages.INDEX_NODE_OUT_OF_BOUND + nodeIndexe);
+        return this.array[nodeIndexe];
     }
-    public int rightChild(int nodeToRetrieveChild){
-        return 0;
+    public int rightChild(int nodeIndexe){
+        if(nodeIndexe < 0)
+            throw new ArrayIndexOutOfBoundsException(ExceptionsMessages.INDEX_NODE_OUT_OF_BOUND + nodeIndexe);
+        nodeIndexe = (++nodeIndexe<<1);
+        if(nodeIndexe > this.array.length)
+            throw new ArrayIndexOutOfBoundsException(ExceptionsMessages.INDEX_NODE_OUT_OF_BOUND + nodeIndexe);
+        return this.array[nodeIndexe];
     }
     public void maxHeapify(){
 
@@ -35,5 +55,11 @@ public class BinaryHeap {
     }
     public void maxHeapMaximum(){
 
+    }
+    public int getSize(){
+        return this.size;
+    }
+    public int getLength(){
+        return this.array.length;
     }
 }

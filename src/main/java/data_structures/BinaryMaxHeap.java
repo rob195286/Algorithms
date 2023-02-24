@@ -13,6 +13,7 @@ public class BinaryMaxHeap {
     public BinaryMaxHeap(int[] arrayToConvertIntoHeap, boolean buildMinOrMaxHeap){
         this.array = arrayToConvertIntoHeap;
         this.size = arrayToConvertIntoHeap.length;
+        this.buildMaxHeap();
     }
 
     public int parent(int i){
@@ -37,9 +38,9 @@ public class BinaryMaxHeap {
         if(leftChildIndex > this.size || rightChildIndex > this.size)
             return;
         int nodeI = this.getNodeAtIndex(index), largestIndex = index;
-        if(leftChildIndex <= this.size && this.getNodeAtIndex(leftChildIndex) > nodeI)
+        if(leftChildIndex < this.size && this.getNodeAtIndex(leftChildIndex) > nodeI)
             largestIndex = leftChildIndex;
-        if(rightChildIndex <= this.size && this.getNodeAtIndex(rightChildIndex) > this.getNodeAtIndex(largestIndex))
+        if(rightChildIndex < this.size && this.getNodeAtIndex(rightChildIndex) > this.getNodeAtIndex(largestIndex))
             largestIndex = rightChildIndex;
         // Echange l'emplacement du noeud par le plus grand.
         if(largestIndex != index){
@@ -52,7 +53,9 @@ public class BinaryMaxHeap {
         }
     }
     public void buildMaxHeap(){
-
+        for (int i = (this.size-1)/2; i >= 0; i--){
+            this.maxHeapify(i);
+        }
     }
     public void maxHeapInsert(int keyToInsert){
 

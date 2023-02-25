@@ -10,10 +10,18 @@ public class BinaryMaxHeap {
     private int size;
     private int[] array;
 
-    public BinaryMaxHeap(int[] arrayToConvertIntoHeap, boolean buildMinOrMaxHeap){
+    public BinaryMaxHeap(int[] arrayToConvertIntoHeap){
+        this(arrayToConvertIntoHeap, true);
+    }
+    public BinaryMaxHeap(int[] arrayToConvertIntoHeap, boolean buildArrayInHeap){
+        this(arrayToConvertIntoHeap, buildArrayInHeap, true);
+    }
+    public BinaryMaxHeap(int[] arrayToConvertIntoHeap, boolean buildArrayInHeap, boolean buildMaxHeap){
         this.array = arrayToConvertIntoHeap;
         this.size = arrayToConvertIntoHeap.length;
-        this.buildMaxHeap();
+        if(buildArrayInHeap){
+            this.buildMaxHeap();
+        }
     }
 
     public int parent(int i){
@@ -42,7 +50,7 @@ public class BinaryMaxHeap {
             largestIndex = leftChildIndex;
         if(rightChildIndex < this.size && this.getNodeAtIndex(rightChildIndex) > this.getNodeAtIndex(largestIndex))
             largestIndex = rightChildIndex;
-        // Echange l'emplacement du noeud par le plus grand.
+        // Echange l'emplacement du noeud le plus grand avec celui qui est le plus faible entre les enfants gauche/drotie.
         if(largestIndex != index){
             this.replaceNodeAtIndexBy(index, this.getNodeAtIndex(largestIndex));
             if(largestIndex == leftChildIndex)

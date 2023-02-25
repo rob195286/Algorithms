@@ -14,7 +14,7 @@ class BinaryMaxHeapTest {
 
     @BeforeEach
     void setUp() {
-        bh1 = new BinaryMaxHeap(new int[]{16,14,10,8,7,9,3,2,4,1}, false);
+        bh1 = new BinaryMaxHeap(new int[]{16,14,10,8,7,9,3,2,4,1});
         bh2 = new BinaryMaxHeap(new int[]{1,14,10,8,7,9,3,2,4,16}, false);
     }
 
@@ -52,18 +52,16 @@ class BinaryMaxHeapTest {
 
     @Test
     void maxHeapify() {
-        // todo : ajouter un insert à la palce
         bh2.maxHeapify(0);
-        /*
         assertEquals(14, bh2.getNodeAtIndex(0));
         assertEquals(8, bh2.getNodeAtIndex(bh2.leftChild(0)));
         assertEquals(10, bh2.getNodeAtIndex(bh2.rightChild(0)));
-         */
     }
 
     @Test
     void buildMaxHeap() {
-        assertEquals(true, bh1.equals(bh2));
+        bh2.buildMaxHeap();
+        assertEquals(bh1, bh2);
     }
 
     @Test

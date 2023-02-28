@@ -14,9 +14,6 @@ public class BinaryMaxHeap {
         this(arrayToConvertIntoHeap, true);
     }
     public BinaryMaxHeap(int[] arrayToConvertIntoHeap, boolean buildArrayInHeap){
-        this(arrayToConvertIntoHeap, buildArrayInHeap, true);
-    }
-    public BinaryMaxHeap(int[] arrayToConvertIntoHeap, boolean buildArrayInHeap, boolean buildMaxHeap){
         this.array = arrayToConvertIntoHeap;
         this.size = arrayToConvertIntoHeap.length;
         if(buildArrayInHeap){
@@ -79,9 +76,6 @@ public class BinaryMaxHeap {
     }
     public int getNodeAtIndex(int nodeIndex){
         return this.array[nodeIndex];
-    }
-    public void exchangeNodes(int n1, int n2){
-       // this.array[0] = 0;
     }
     public int getSize(){
         return this.size;

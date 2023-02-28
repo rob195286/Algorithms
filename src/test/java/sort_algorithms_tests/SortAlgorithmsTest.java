@@ -74,7 +74,10 @@ class SortAlgorithmsTest {
     @Test
     void heapSort() {
         sa.heapSort(array1, array1.length);
-        System.out.println(Arrays.toString(array1));
         assertEquals(0, Arrays.compare(array1ToCompareWith, array1));
+        sa.heapSort(array2, array2.length);
+        assertEquals(0, Arrays.compare(array2ToCompareWith, array2));
+        sa.heapSort(array3, array3.length);
+        assertEquals(0, Arrays.compare(array3ToCompareWith, array3));
     }
 }

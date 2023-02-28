@@ -68,9 +68,10 @@ public class SortAlgorithms {
     }
     public void heapSort(int[] arrayToSort, int arraySizeToSort){
         BinaryMaxHeap bh = new BinaryMaxHeap(arrayToSort);
-        for (int i = arraySizeToSort-1; i > 1; i--){
+        for (int i = arraySizeToSort - 1; i >= 1; i--){
+            int tempNode = bh.getNodeAtIndex(0);
             bh.replaceNodeAtIndexBy(0, bh.getNodeAtIndex(i));
-            bh.replaceNodeAtIndexBy(i, bh.getNodeAtIndex(0));
+            bh.replaceNodeAtIndexBy(i, tempNode);
             bh.decrementSize();
             bh.maxHeapify(0);
         }

@@ -70,4 +70,11 @@ class SortAlgorithmsTest {
         sa.mergeSort(array3);
         assertEquals(0, Arrays.compare(array3ToCompareWith, array3));
     }
+
+    @Test
+    void heapSort() {
+        sa.heapSort(array1, array1.length);
+        System.out.println(Arrays.toString(array1));
+        assertEquals(0, Arrays.compare(array1ToCompareWith, array1));
+    }
 }

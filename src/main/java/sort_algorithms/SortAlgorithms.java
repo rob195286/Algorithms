@@ -1,6 +1,8 @@
 package sort_algorithms;
 
 
+import data_structures.BinaryMaxHeap;
+
 public class SortAlgorithms {
     public void insertionSort(int[] arrayToSort){
         int value;
@@ -64,5 +66,13 @@ public class SortAlgorithms {
             k++;
         }
     }
-
+    public void heapSort(int[] arrayToSort, int arraySizeToSort){
+        BinaryMaxHeap bh = new BinaryMaxHeap(arrayToSort);
+        for (int i = arraySizeToSort-1; i > 1; i--){
+            bh.replaceNodeAtIndexBy(0, bh.getNodeAtIndex(i));
+            bh.replaceNodeAtIndexBy(i, bh.getNodeAtIndex(0));
+            bh.decrementSize();
+            bh.maxHeapify(0);
+        }
+    }
 }

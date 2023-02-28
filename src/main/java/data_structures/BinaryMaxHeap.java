@@ -80,11 +80,17 @@ public class BinaryMaxHeap {
     public int getNodeAtIndex(int nodeIndex){
         return this.array[nodeIndex];
     }
+    public void exchangeNodes(int n1, int n2){
+       // this.array[0] = 0;
+    }
     public int getSize(){
         return this.size;
     }
     public int getLength(){
         return this.array.length;
+    }
+    public void decrementSize(){
+        this.size--;
     }
     @Override
     public String toString() {
@@ -103,7 +109,7 @@ public class BinaryMaxHeap {
         }
         return Arrays.compare(this.array, ((BinaryMaxHeap)o).array) == 0;
     }
-    private void replaceNodeAtIndexBy(int nodeIndex, int newValue){
+    public void replaceNodeAtIndexBy(int nodeIndex, int newValue){
         this.array[nodeIndex] = newValue;
     }
 }

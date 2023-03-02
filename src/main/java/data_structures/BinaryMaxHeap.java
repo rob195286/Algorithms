@@ -76,7 +76,7 @@ public class BinaryMaxHeap {
     }
     @Override
     public String toString() {
-        return Arrays.toString(this.array);
+        return Arrays.toString(Arrays.copyOf(this.array, this.size));
     }
     @Override
     public boolean equals(Object o){

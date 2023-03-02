@@ -19,26 +19,23 @@ class MaxPriorityQueueTest {
     }
 
     @Test
-    void maxPriorityQueueBuilding() {
-        // todo : voir comment tester
-       // assertEquals(0,maxPriorityQueue.);
-    }
-
-    @Test
     void maxHeapInsert() {
     }
 
     @Test
     void maxHeapExtractMax() {
+        int pqSize = maxPriorityQueue1.getSize();
+        int maxValue = maxPriorityQueue1.maxHeapExtractMax();
+        assertEquals(16, maxValue);
+        assertEquals(--pqSize, maxPriorityQueue1.getSize());
+
+        pqSize = maxPriorityQueue2.getSize();
+        maxValue = maxPriorityQueue2.maxHeapExtractMax();
+        assertEquals(16, maxValue);
+        assertEquals(--pqSize, maxPriorityQueue2.getSize());
     }
 
     @Test
     void maxHeapIncreaseKey() {
-    }
-
-    @Test
-    void maxHeapMaximum() {
-        assertEquals(16,maxPriorityQueue1.maxHeapMaximum());
-        assertEquals(16,maxPriorityQueue2.maxHeapMaximum());
     }
 }

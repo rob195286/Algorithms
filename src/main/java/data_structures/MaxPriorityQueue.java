@@ -13,8 +13,12 @@ public class MaxPriorityQueue {
 
     }
     public int maxHeapExtractMax(){
-
-        return this.binaryMaxHeap.getNodeAtIndex(0);
+        int max = this.maxHeapMaximum();
+        int lastNodeIndex = this.binaryMaxHeap.getSize() - 1;
+        this.binaryMaxHeap.replaceNodeAtIndexBy(0, this.binaryMaxHeap.getNodeAtIndex(lastNodeIndex));
+        this.binaryMaxHeap.decrementSize();
+        this.binaryMaxHeap.maxHeapify(0);
+        return max;
     }
     public void maxHeapIncreaseKey(int key){
 
@@ -23,5 +27,9 @@ public class MaxPriorityQueue {
         if (this.binaryMaxHeap.getSize() < 1)
             throw new ArrayIndexOutOfBoundsException(ExceptionsMessages.INDEX_NODE_OUT_OF_BOUND + 0);
         return this.binaryMaxHeap.getNodeAtIndex(0);
+    }
+
+    public int getSize(){
+        return this.binaryMaxHeap.getSize();
     }
 }

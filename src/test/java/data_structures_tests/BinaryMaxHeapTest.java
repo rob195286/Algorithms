@@ -65,22 +65,6 @@ class BinaryMaxHeapTest {
     }
 
     @Test
-    void maxHeapInsert() {
-    }
-
-    @Test
-    void maxHeapExtractMax() {
-    }
-
-    @Test
-    void maxHeapIncreaseKey() {
-    }
-
-    @Test
-    void maxHeapMaximum() {
-    }
-
-    @Test
     void getSize() {
         assertEquals(10, bh1.getSize());
     }

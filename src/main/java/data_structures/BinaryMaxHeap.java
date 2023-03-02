@@ -13,43 +13,43 @@ public class BinaryMaxHeap {
     public BinaryMaxHeap(int[] arrayToConvertIntoHeap){
         this(arrayToConvertIntoHeap, true);
     }
-    public BinaryMaxHeap(int[] arrayToConvertIntoHeap, boolean buildArrayInHeap){
+    public BinaryMaxHeap(int[] arrayToConvertIntoHeap, boolean convertArrayInHeap){
         this.array = arrayToConvertIntoHeap;
         this.size = arrayToConvertIntoHeap.length;
-        if(buildArrayInHeap){
+        if(convertArrayInHeap){
             this.buildMaxHeap();
         }
     }
 
-    public int parent(int i){
-        if(i <= 0)
-            throw new ArrayIndexOutOfBoundsException(ExceptionsMessages.INDEX_NODE_OUT_OF_BOUND + i);
-        return (i-1)>>1;
+    public int parent(int nodeIndex){
+        if(nodeIndex <= 0)
+            throw new ArrayIndexOutOfBoundsException(ExceptionsMessages.INDEX_NODE_OUT_OF_BOUND + nodeIndex);
+        return (nodeIndex-1)>>1;
     }
-    public int leftChild(int i){
-        if(i < 0)
-            throw new ArrayIndexOutOfBoundsException(ExceptionsMessages.INDEX_NODE_OUT_OF_BOUND + i);
-        i = (++i<<1) - 1;
-        return i;
+    public int leftChild(int nodeIndex){
+        if(nodeIndex < 0)
+            throw new ArrayIndexOutOfBoundsException(ExceptionsMessages.INDEX_NODE_OUT_OF_BOUND + nodeIndex);
+        nodeIndex = (++nodeIndex<<1) - 1;
+        return nodeIndex;
     }
-    public int rightChild(int i){
-        if(i < 0)
-            throw new ArrayIndexOutOfBoundsException(ExceptionsMessages.INDEX_NODE_OUT_OF_BOUND + i);
-        i = (++i<<1);
-        return i;
+    public int rightChild(int nodeIndex){
+        if(nodeIndex < 0)
+            throw new ArrayIndexOutOfBoundsException(ExceptionsMessages.INDEX_NODE_OUT_OF_BOUND + nodeIndex);
+        nodeIndex = (++nodeIndex<<1);
+        return nodeIndex;
     }
-    public void maxHeapify(int index){
-        int leftChildIndex = this.leftChild(index), rightChildIndex = this.rightChild(index);
+    public void maxHeapify(int nodeIndex){
+        int leftChildIndex = this.leftChild(nodeIndex), rightChildIndex = this.rightChild(nodeIndex);
         if(leftChildIndex > this.size || rightChildIndex > this.size)
             return;
-        int nodeI = this.getNodeAtIndex(index), largestIndex = index;
+        int nodeI = this.getNodeAtIndex(nodeIndex), largestIndex = nodeIndex;
         if(leftChildIndex < this.size && this.getNodeAtIndex(leftChildIndex) > nodeI)
             largestIndex = leftChildIndex;
         if(rightChildIndex < this.size && this.getNodeAtIndex(rightChildIndex) > this.getNodeAtIndex(largestIndex))
             largestIndex = rightChildIndex;
         // Echange l'emplacement du noeud le plus grand avec celui qui est le plus faible entre les enfants gauche/drotie.
-        if(largestIndex != index){
-            this.replaceNodeAtIndexBy(index, this.getNodeAtIndex(largestIndex));
+        if(largestIndex != nodeIndex){
+            this.replaceNodeAtIndexBy(nodeIndex, this.getNodeAtIndex(largestIndex));
             if(largestIndex == leftChildIndex)
                 this.replaceNodeAtIndexBy(leftChildIndex, nodeI);
             else
@@ -61,18 +61,6 @@ public class BinaryMaxHeap {
         for (int i = (this.size-1)/2; i >= 0; i--){
             this.maxHeapify(i);
         }
-    }
-    public void maxHeapInsert(int keyToInsert){
-
-    }
-    public int maxHeapExtractMax(){
-        return 0;
-    }
-    public void maxHeapIncreaseKey(int key){
-
-    }
-    public void maxHeapMaximum(){
-
     }
     public int getNodeAtIndex(int nodeIndex){
         return this.array[nodeIndex];

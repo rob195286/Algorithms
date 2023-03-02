@@ -49,7 +49,7 @@ class SortAlgorithmsTest {
     }
 
     @Test
-    void insertionSortTest() {
+    void insertionSort() {
         sa.insertionSort(array1);
         assertEquals(0, Arrays.compare(array1, array1ToCompareWith));
         sa.insertionSort(array2);
@@ -59,7 +59,7 @@ class SortAlgorithmsTest {
     }
 
     @Test
-    void mergeSortTest() {
+    void mergeSort() {
         // TODO : mergesort, vérifier si c'est ok
         System.arraycopy(array1, 0, array1_2,0, array1.length);
         System.arraycopy(array2, 0, array1_2, array1.length, array2.length);

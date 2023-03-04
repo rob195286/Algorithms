@@ -73,4 +73,12 @@ class BinaryMaxHeapTest {
     void getLength() {
         assertEquals(10, bh1.getLength());
     }
+
+    @Test
+    void addKey() {
+        int bh1SizeBeforeAdding = bh1.getSize();
+        bh1.addKey(50);
+        assertEquals(50, bh1.getNodeAtIndex(bh1.getSize() - 1));
+        assertEquals(++bh1SizeBeforeAdding, bh1.getSize());
+    }
 }

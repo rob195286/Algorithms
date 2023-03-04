@@ -74,9 +74,13 @@ public class BinaryMaxHeap {
     public void decrementSize(){
         this.size--;
     }
-    @Override
-    public String toString() {
-        return Arrays.toString(Arrays.copyOf(this.array, this.size));
+    public void replaceNodeAtIndexBy(int nodeIndex, int newValue){
+        this.array[nodeIndex] = newValue;
+    }
+    public void addKey(int key){
+        this.array = Arrays.copyOf(this.array, this.array.length + 1);
+        this.size++;
+        this.array[this.array.length - 1] = key;
     }
     @Override
     public boolean equals(Object o){
@@ -91,7 +95,9 @@ public class BinaryMaxHeap {
         }
         return Arrays.compare(this.array, ((BinaryMaxHeap)o).array) == 0;
     }
-    public void replaceNodeAtIndexBy(int nodeIndex, int newValue){
-        this.array[nodeIndex] = newValue;
+    @Override
+    public String toString() {
+        return Arrays.toString(Arrays.copyOf(this.array, this.size));
     }
 }
+

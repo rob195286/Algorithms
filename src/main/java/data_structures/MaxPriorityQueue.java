@@ -1,20 +1,19 @@
 package data_structures;
 
 import utilitarian.ExceptionsMessages;
-
 import java.security.InvalidKeyException;
 
-import static utilitarian.ExceptionsMessages.KEY_UNDER_CURRENT_VALUE;
 
 public class MaxPriorityQueue {
-    private BinaryMaxHeap binaryMaxHeap;
+    private final BinaryMaxHeap binaryMaxHeap;
 
     public MaxPriorityQueue(int[] arraytoConvertInMaxPriorityQueue){
         this.binaryMaxHeap = new BinaryMaxHeap(arraytoConvertInMaxPriorityQueue);
     }
 
-    public void maxHeapInsert(int keyToInsert){
-
+    public void maxHeapInsert(int keyToInsert) throws InvalidKeyException {
+        this.binaryMaxHeap.addKey(keyToInsert);
+        this.maxHeapIncreaseKey(this.binaryMaxHeap.getSize() - 1, keyToInsert);
     }
     public int maxHeapExtractMax(){
         int max = this.maxHeapMaximum();
@@ -53,7 +52,7 @@ public class MaxPriorityQueue {
     @Override
     public String toString() {
         return "MaxPriorityQueue{" +
-                "binaryMaxHeap=" + binaryMaxHeap +
+                "binaryMaxHeap=" + this.binaryMaxHeap +
                 '}';
     }
 }

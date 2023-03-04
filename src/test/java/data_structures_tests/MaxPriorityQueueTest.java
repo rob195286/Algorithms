@@ -22,6 +22,19 @@ class MaxPriorityQueueTest {
 
     @Test
     void maxHeapInsert() {
+        try {
+            maxPriorityQueue1.maxHeapInsert(50);
+            System.out.println(maxPriorityQueue1);
+            assertEquals(50, maxPriorityQueue1.maxHeapExtractMax());
+            assertEquals(16, maxPriorityQueue1.maxHeapExtractMax());
+            assertEquals(14, maxPriorityQueue1.maxHeapExtractMax());
+            maxPriorityQueue1.maxHeapExtractMax();
+            assertEquals(9, maxPriorityQueue1.maxHeapExtractMax());
+            maxPriorityQueue1.maxHeapExtractMax();
+            assertEquals(7, maxPriorityQueue1.maxHeapExtractMax());
+        } catch (InvalidKeyException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Test

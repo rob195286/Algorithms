@@ -11,19 +11,18 @@ public class MaxPriorityQueue {
         this.binaryMaxHeap = new BinaryMaxHeap(arraytoConvertInMaxPriorityQueue);
     }
 
-    public void maxHeapInsert(int keyToInsert) throws InvalidKeyException {
+    public void enqueue(int keyToInsert) throws InvalidKeyException {
         this.binaryMaxHeap.addKey(keyToInsert);
-        this.maxHeapIncreaseKey(this.binaryMaxHeap.getSize() - 1, keyToInsert);
+        this.increaseKey(this.binaryMaxHeap.getSize() - 1, keyToInsert);
     }
-    public int maxHeapExtractMax(){
-        int max = this.maxHeapMaximum();
-        int lastNodeIndex = this.binaryMaxHeap.getSize() - 1;
-        this.binaryMaxHeap.replaceNodeAtIndexBy(0, this.binaryMaxHeap.getNodeAtIndex(lastNodeIndex));
+    public int extractMax(){
+        int max = this.maximum();
+        this.binaryMaxHeap.replaceNodeAtIndexBy(0, this.binaryMaxHeap.getNodeAtIndex(this.binaryMaxHeap.getSize() - 1));
         this.binaryMaxHeap.decrementSize();
         this.binaryMaxHeap.maxHeapify(0);
         return max;
     }
-    public void maxHeapIncreaseKey(int nodeIndex, int key) throws InvalidKeyException {
+    public void increaseKey(int nodeIndex, int key) throws InvalidKeyException {
         int nodeToIncreaseValue = this.binaryMaxHeap.getNodeAtIndex(nodeIndex);
         if(key < nodeToIncreaseValue)
             throw new InvalidKeyException(ExceptionsMessages.KEY_UNDER_CURRENT_VALUE + nodeToIncreaseValue + ", " + nodeIndex + ", " + key);
@@ -39,16 +38,15 @@ public class MaxPriorityQueue {
             i = this.binaryMaxHeap.parent(i);
         }
     }
-    public int maxHeapMaximum(){
+    public int maximum(){
         if (this.binaryMaxHeap.getSize() < 1)
             throw new ArrayIndexOutOfBoundsException(ExceptionsMessages.INDEX_NODE_OUT_OF_BOUND + 0);
         return this.binaryMaxHeap.getNodeAtIndex(0);
     }
-
     public int getSize(){
         return this.binaryMaxHeap.getSize();
     }
-
+    public int getLength(){return this.binaryMaxHeap.getLength();}
     @Override
     public String toString() {
         return "MaxPriorityQueue{" +

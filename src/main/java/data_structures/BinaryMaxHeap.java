@@ -71,6 +71,7 @@ public class BinaryMaxHeap {
     public int getLength(){
         return this.array.length;
     }
+    // todo : voir si pas mieux de rendre priver et de gérer ça en interne
     public void decrementSize(){
         this.size--;
     }
@@ -78,9 +79,10 @@ public class BinaryMaxHeap {
         this.array[nodeIndex] = newValue;
     }
     public void addKey(int key){
-        this.array = Arrays.copyOf(this.array, this.array.length + 1);
-        this.size++;
-        this.array[this.array.length - 1] = key;
+        if(this.array.length == this.size){
+            this.array = Arrays.copyOf(this.array, this.array.length + 1);
+        }
+        this.array[++this.size - 1] = key;
     }
     @Override
     public boolean equals(Object o){

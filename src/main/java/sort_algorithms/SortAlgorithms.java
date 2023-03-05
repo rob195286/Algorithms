@@ -68,7 +68,7 @@ public class SortAlgorithms {
     }
     public void heapSort(int[] arrayToSort, int arraySizeToSort){
         BinaryMaxHeap bh = new BinaryMaxHeap(arrayToSort);
-        for (int i = arraySizeToSort - 1; i >= 1; i--){
+        for (int i = arraySizeToSort - 1; i >= 1; i--){  // todo : vérifer si on ne peut pas encapsuler l'échange de noeuds ainsi que le "decrementSize"
             int tempNode = bh.getNodeAtIndex(0);
             bh.replaceNodeAtIndexBy(0, bh.getNodeAtIndex(i));
             bh.replaceNodeAtIndexBy(i, tempNode);

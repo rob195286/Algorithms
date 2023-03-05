@@ -21,45 +21,61 @@ class MaxPriorityQueueTest {
     }
 
     @Test
-    void maxHeapInsert() {
+    void enqueue() {
         try {
-            maxPriorityQueue1.maxHeapInsert(50);
-            System.out.println(maxPriorityQueue1);
-            assertEquals(50, maxPriorityQueue1.maxHeapExtractMax());
-            assertEquals(16, maxPriorityQueue1.maxHeapExtractMax());
-            assertEquals(14, maxPriorityQueue1.maxHeapExtractMax());
-            maxPriorityQueue1.maxHeapExtractMax();
-            assertEquals(9, maxPriorityQueue1.maxHeapExtractMax());
-            maxPriorityQueue1.maxHeapExtractMax();
-            assertEquals(7, maxPriorityQueue1.maxHeapExtractMax());
+            maxPriorityQueue1.enqueue(50);
+            assertEquals(50, maxPriorityQueue1.extractMax());
+            assertEquals(16, maxPriorityQueue1.extractMax());
+            assertEquals(14, maxPriorityQueue1.extractMax());
+            maxPriorityQueue1.extractMax();
+            assertEquals(9, maxPriorityQueue1.extractMax());
+            maxPriorityQueue1.extractMax();
+            assertEquals(7, maxPriorityQueue1.extractMax());
         } catch (InvalidKeyException e) {
             throw new RuntimeException(e);
         }
     }
-
     @Test
-    void maxHeapExtractMax() {
+    void extractMax() {
         int pqSize = maxPriorityQueue1.getSize();
-        int maxValue = maxPriorityQueue1.maxHeapExtractMax();
+        int maxValue = maxPriorityQueue1.extractMax();
         assertEquals(16, maxValue);
         assertEquals(--pqSize, maxPriorityQueue1.getSize());
 
         pqSize = maxPriorityQueue2.getSize();
-        maxValue = maxPriorityQueue2.maxHeapExtractMax();
+        maxValue = maxPriorityQueue2.extractMax();
         assertEquals(16, maxValue);
         assertEquals(--pqSize, maxPriorityQueue2.getSize());
     }
-
     @Test
-    void maxHeapIncreaseKey() {
+    void increaseKey() {
         try {
-            maxPriorityQueue1.maxHeapIncreaseKey(8, 18);
-            assertEquals(18, maxPriorityQueue1.maxHeapExtractMax());
-            assertEquals(16, maxPriorityQueue1.maxHeapExtractMax());
-            assertEquals(14, maxPriorityQueue1.maxHeapExtractMax());
-            maxPriorityQueue1.maxHeapExtractMax();
-            maxPriorityQueue1.maxHeapExtractMax();
-            assertEquals(8, maxPriorityQueue1.maxHeapExtractMax());
+            maxPriorityQueue1.increaseKey(8, 18);
+            assertEquals(18, maxPriorityQueue1.extractMax());
+            assertEquals(16, maxPriorityQueue1.extractMax());
+            assertEquals(14, maxPriorityQueue1.extractMax());
+            maxPriorityQueue1.extractMax();
+            maxPriorityQueue1.extractMax();
+            assertEquals(8, maxPriorityQueue1.extractMax());
+        } catch (InvalidKeyException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    @Test
+    void enqueuAndDequeue() {
+        try {
+            maxPriorityQueue1.enqueue(50);
+            assertEquals(50, maxPriorityQueue1.extractMax());
+            assertEquals(16, maxPriorityQueue1.extractMax());
+            maxPriorityQueue1.enqueue(65);
+            assertEquals(65, maxPriorityQueue1.extractMax());
+            assertEquals(14, maxPriorityQueue1.extractMax());
+            maxPriorityQueue1.enqueue(52);
+            maxPriorityQueue1.enqueue(53);
+            assertEquals(53, maxPriorityQueue1.extractMax());
+            assertEquals(52, maxPriorityQueue1.extractMax());
+            assertEquals(8, maxPriorityQueue1.getSize());
+            assertEquals(11, maxPriorityQueue1.getLength());
         } catch (InvalidKeyException e) {
             throw new RuntimeException(e);
         }

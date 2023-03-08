@@ -80,4 +80,14 @@ class SortAlgorithmsTest {
         sa.heapSort(array3, array3.length);
         assertEquals(0, Arrays.compare(array3ToCompareWith, array3));
     }
+
+    @Test
+    void countingSort() {
+        sa.countingSort(array1, 0);
+        assertEquals(0, Arrays.compare(array1ToCompareWith, array1));
+        sa.countingSort(array2, 0);
+        assertEquals(0, Arrays.compare(array2ToCompareWith, array2));
+        sa.countingSort(array3, 0);
+        assertEquals(0, Arrays.compare(array3ToCompareWith, array3));
+    }
 }

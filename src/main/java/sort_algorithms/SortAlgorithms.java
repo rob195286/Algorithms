@@ -76,4 +76,7 @@ public class SortAlgorithms {
             bh.maxHeapify(0);
         }
     }
+    public void countingSort(int[] arrayToSort, int k){
+        int[] B = new int[arrayToSort.length], C = new int[k];
+    }
 }

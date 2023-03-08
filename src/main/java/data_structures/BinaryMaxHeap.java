@@ -9,16 +9,11 @@ public class BinaryMaxHeap {
     // Attribut indiquant le nombre d'élément actuel dans la structure où 0 est la racine.
     private int size;
     private int[] array;
-
+    // todo : voir si possibilité faire un minheap
     public BinaryMaxHeap(int[] arrayToConvertIntoHeap){
-        this(arrayToConvertIntoHeap, true);
-    }
-    public BinaryMaxHeap(int[] arrayToConvertIntoHeap, boolean convertArrayInHeap){
         this.array = arrayToConvertIntoHeap;
         this.size = arrayToConvertIntoHeap.length;
-        if(convertArrayInHeap){
-            this.buildMaxHeap();
-        }
+        this.buildMaxHeap();
     }
 
     public int parent(int nodeIndex){
@@ -57,11 +52,6 @@ public class BinaryMaxHeap {
             this.maxHeapify(largestIndex);
         }
     }
-    public void buildMaxHeap(){
-        for (int i = (this.size-1)/2; i >= 0; i--){
-            this.maxHeapify(i);
-        }
-    }
     public int getNodeAtIndex(int nodeIndex){
         return this.array[nodeIndex];
     }
@@ -82,7 +72,8 @@ public class BinaryMaxHeap {
         if(this.array.length == this.size){
             this.array = Arrays.copyOf(this.array, this.array.length + 1);
         }
-        this.array[++this.size - 1] = key;
+        this.array[this.size] = key;
+        this.size++;
     }
     @Override
     public boolean equals(Object o){
@@ -100,6 +91,11 @@ public class BinaryMaxHeap {
     @Override
     public String toString() {
         return Arrays.toString(Arrays.copyOf(this.array, this.size));
+    }
+    private void buildMaxHeap(){
+        for (int i = (this.size-1)/2; i >= 0; i--){
+            this.maxHeapify(i);
+        }
     }
 }
 

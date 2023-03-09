@@ -36,7 +36,7 @@ class SortAlgorithmsTest {
         array1 = new int[]{2, 6, 9, 8, 11, 23, 65, 89, 14, 47, 85};
         array2 = new int[]{0, 89, 18, 4, 8, 12, 13, 14, 21, 35, 64};
         for (int i = 0; i < arraySize; i++){
-            array3[i] = randInt.nextInt();
+            array3[i] = randInt.nextInt(0, arraySize);
         }
         array1_2 = new int[array1.length + array2.length];
         array1_2ToCompareWith = new int[array1.length + array2.length];
@@ -83,11 +83,15 @@ class SortAlgorithmsTest {
 
     @Test
     void countingSort() {
-        sa.countingSort(array1, 0);
-        assertEquals(0, Arrays.compare(array1ToCompareWith, array1));
-        sa.countingSort(array2, 0);
-        assertEquals(0, Arrays.compare(array2ToCompareWith, array2));
-        sa.countingSort(array3, 0);
-        assertEquals(0, Arrays.compare(array3ToCompareWith, array3));
+        int heighestVal = array1ToCompareWith[array1ToCompareWith.length-1];
+        assertEquals(0, Arrays.compare(array1ToCompareWith, sa.countingSort(array1, heighestVal)));
+
+        heighestVal = array2ToCompareWith[array2ToCompareWith.length-1];
+        sa.countingSort(array2, heighestVal);
+        assertEquals(0, Arrays.compare(array2ToCompareWith, sa.countingSort(array2, heighestVal)));
+
+        heighestVal = array3ToCompareWith[array3ToCompareWith.length-1];
+        sa.countingSort(array3, heighestVal);
+        assertEquals(0, Arrays.compare(array3ToCompareWith, sa.countingSort(array3, heighestVal)));
     }
 }

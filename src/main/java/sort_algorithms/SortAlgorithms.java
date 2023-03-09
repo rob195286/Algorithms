@@ -3,6 +3,8 @@ package sort_algorithms;
 
 import data_structures.BinaryMaxHeap;
 
+import java.util.Arrays;
+
 public class SortAlgorithms {
     public void insertionSort(int[] arrayToSort){
         int value;
@@ -76,7 +78,21 @@ public class SortAlgorithms {
             bh.maxHeapify(0);
         }
     }
-    public void countingSort(int[] arrayToSort, int k){
-        int[] B = new int[arrayToSort.length], C = new int[k];
+    public int[] countingSort(int[] arrayToSort, int highestValue){
+        // todo : faire un une condition qui enlève les doublons
+        int[] B = new int[arrayToSort.length];
+        int[] C = new int[++highestValue];           // Array contenant le nombre d'éléments inférieur à son indexe, et donc sa place dans B
+        for (int i = 0; i < arrayToSort.length; i++){
+            C[arrayToSort[i]]++;                    // Incrémente le nombre i à son indexe à chaque fois qu'il est trouvé.
+        }
+        for (int i = 1; i < highestValue; i++){
+            C[i] += C[i-1];                   // Place dans C la quantité de nombre (par rapport à son index)
+                                              //      se trouvant avant lui, et donc indique son ordre dans A.
+        }
+        for (int i = arrayToSort.length - 1; i >= 0; i--){
+            B[C[arrayToSort[i]] - 1] = arrayToSort[i];
+            C[arrayToSort[i]]--;
+        }
+        return B;
     }
 }

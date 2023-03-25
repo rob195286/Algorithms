@@ -1,7 +1,7 @@
 package data_structures;
 
 
-import utilitarian.ExceptionsMessages;
+import util.ExceptionsMessages;
 
 import java.util.Arrays;
 
@@ -11,59 +11,59 @@ public class BinaryMaxHeap {
     private int[] array;
     // todo : voir si possibilité faire un minheap
     public BinaryMaxHeap(int[] arrayToConvertIntoHeap){
-        this.array = arrayToConvertIntoHeap;
-        this.size = arrayToConvertIntoHeap.length;
-        this.buildMaxHeap();
+        array = arrayToConvertIntoHeap;
+        size = arrayToConvertIntoHeap.length;
+        buildMaxHeap();
     }
 
     public int parent(int nodeIndex){
         if(nodeIndex <= 0)
             throw new ArrayIndexOutOfBoundsException(ExceptionsMessages.INDEX_NODE_OUT_OF_BOUND + nodeIndex);
-        return (nodeIndex-1)>>1;
+        return (nodeIndex - 1) >> 1;
     }
     public int leftChild(int nodeIndex){
         if(nodeIndex < 0)
             throw new ArrayIndexOutOfBoundsException(ExceptionsMessages.INDEX_NODE_OUT_OF_BOUND + nodeIndex);
-        nodeIndex = (++nodeIndex<<1) - 1;
+        nodeIndex = (++nodeIndex << 1) - 1;
         return nodeIndex;
     }
     public int rightChild(int nodeIndex){
         if(nodeIndex < 0)
             throw new ArrayIndexOutOfBoundsException(ExceptionsMessages.INDEX_NODE_OUT_OF_BOUND + nodeIndex);
-        nodeIndex = (++nodeIndex<<1);
+        nodeIndex = (++nodeIndex << 1);
         return nodeIndex;
     }
     public void maxHeapify(int nodeIndex){
-        int leftChildIndex = this.leftChild(nodeIndex), rightChildIndex = this.rightChild(nodeIndex);
+        int leftChildIndex = leftChild(nodeIndex), rightChildIndex = rightChild(nodeIndex);
         if(leftChildIndex > this.size || rightChildIndex > this.size)
             return;
-        int nodeI = this.getNodeAtIndex(nodeIndex), largestIndex = nodeIndex;
-        if(leftChildIndex < this.size && this.getNodeAtIndex(leftChildIndex) > nodeI)
+        int nodeI = getNodeAtIndex(nodeIndex), largestIndex = nodeIndex;
+        if(leftChildIndex < this.size && getNodeAtIndex(leftChildIndex) > nodeI)
             largestIndex = leftChildIndex;
-        if(rightChildIndex < this.size && this.getNodeAtIndex(rightChildIndex) > this.getNodeAtIndex(largestIndex))
+        if(rightChildIndex < this.size && getNodeAtIndex(rightChildIndex) > getNodeAtIndex(largestIndex))
             largestIndex = rightChildIndex;
         // Echange l'emplacement du noeud le plus grand avec celui qui est le plus faible entre les enfants gauche/drotie.
         if(largestIndex != nodeIndex){
-            this.replaceNodeAtIndexBy(nodeIndex, this.getNodeAtIndex(largestIndex));
+            replaceNodeAtIndexBy(nodeIndex, getNodeAtIndex(largestIndex));
             if(largestIndex == leftChildIndex)
-                this.replaceNodeAtIndexBy(leftChildIndex, nodeI);
+                replaceNodeAtIndexBy(leftChildIndex, nodeI);
             else
-                this.replaceNodeAtIndexBy(rightChildIndex, nodeI);
-            this.maxHeapify(largestIndex);
+                replaceNodeAtIndexBy(rightChildIndex, nodeI);
+            maxHeapify(largestIndex);
         }
     }
     public int getNodeAtIndex(int nodeIndex){
-        return this.array[nodeIndex];
+        return array[nodeIndex];
     }
     public int getSize(){
-        return this.size;
+        return size;
     }
     public int getLength(){
-        return this.array.length;
+        return array.length;
     }
     // todo : voir si pas mieux de rendre priver et de gérer ça en interne
     public void decrementSize(){
-        this.size--;
+        size--;
     }
     public void replaceNodeAtIndexBy(int nodeIndex, int newValue){
         this.array[nodeIndex] = newValue;
@@ -77,24 +77,20 @@ public class BinaryMaxHeap {
     }
     @Override
     public boolean equals(Object o){
-        if(o == null){
+        if(o == null)
             return false;
-        }
-        if (o == this){
+        if (o == this)
             return true;
-        }
-        if (!(o instanceof BinaryMaxHeap)){
-            return false;
-        }
-        return Arrays.compare(this.array, ((BinaryMaxHeap)o).array) == 0;
+        return o instanceof BinaryMaxHeap &&
+               Arrays.compare(this.array, ((BinaryMaxHeap)o).array) == 0;
     }
     @Override
     public String toString() {
         return Arrays.toString(Arrays.copyOf(this.array, this.size));
     }
     private void buildMaxHeap(){
-        for (int i = (this.size-1)/2; i >= 0; i--){
-            this.maxHeapify(i);
+        for (int i = (this.size - 1)/2; i >= 0; i--){
+            maxHeapify(i);
         }
     }
 }

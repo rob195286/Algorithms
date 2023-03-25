@@ -20,12 +20,18 @@ class SortAlgorithmsTest {
     int arraySize = 100000;
     Random randInt = new Random();
     int[] array1;
+    double[] array1F;
     int[] array2;
+    double[] array2F;
     int[] array3 = new int[arraySize];
+    double[] array3F = new double[arraySize];
     int[] array1_2;
     int[] array1ToCompareWith;
+    double[] array1FToCompareWith;
     int[] array2ToCompareWith;
+    double[] array2FToCompareWith;
     int[] array3ToCompareWith = new int[arraySize];
+    double[] array3FToCompareWith = new double[arraySize];
     int[] array1_2ToCompareWith;
 
     @BeforeAll
@@ -34,18 +40,29 @@ class SortAlgorithmsTest {
     @BeforeEach
     public void setUp(){
         array1 = new int[]{2, 6, 9, 8, 11, 23, 65, 89, 14, 47, 85};
+        array1F = new double[]{.2, .6, .9, .8, .11, .23, .65, .89, .14, .47, .85};
         array2 = new int[]{0, 89, 18, 4, 8, 12, 13, 14, 21, 35, 64};
+        array2F = new double[]{.0, .89, .18, .4, .8, .12, .13, .14, .21, .35, .64};
         for (int i = 0; i < arraySize; i++){
             array3[i] = randInt.nextInt(0, arraySize);
+        }
+        for (int i = 0; i < arraySize; i++){
+            array3F[i] = randInt.nextDouble(0, arraySize);
         }
         array1_2 = new int[array1.length + array2.length];
         array1_2ToCompareWith = new int[array1.length + array2.length];
         array1ToCompareWith = array1.clone();
+        array1FToCompareWith = array1F.clone();
         array2ToCompareWith = array2.clone();
+        array2FToCompareWith = array2F.clone();
         array3ToCompareWith = array3.clone();
+        array3FToCompareWith = array3F.clone();
         Arrays.sort(array1ToCompareWith);
+        Arrays.sort(array1FToCompareWith);
         Arrays.sort(array2ToCompareWith);
+        Arrays.sort(array2FToCompareWith);
         Arrays.sort(array3ToCompareWith);
+        Arrays.sort(array3FToCompareWith);
     }
 
     @Test
@@ -87,11 +104,24 @@ class SortAlgorithmsTest {
         assertEquals(0, Arrays.compare(array1ToCompareWith, sa.countingSort(array1, heighestVal)));
 
         heighestVal = array2ToCompareWith[array2ToCompareWith.length-1];
-        sa.countingSort(array2, heighestVal);
         assertEquals(0, Arrays.compare(array2ToCompareWith, sa.countingSort(array2, heighestVal)));
 
         heighestVal = array3ToCompareWith[array3ToCompareWith.length-1];
-        sa.countingSort(array3, heighestVal);
         assertEquals(0, Arrays.compare(array3ToCompareWith, sa.countingSort(array3, heighestVal)));
+    }
+
+    @Test
+    void bucketSort() {
+       // int n = 10;
+        // todo : continuer
+        /*
+        sa.bucketSort(array1F, n);
+        assertEquals(0, Arrays.compare(array1FToCompareWith, array1F));
+        sa.bucketSort(array2F, n);
+        assertEquals(0, Arrays.compare(array2FToCompareWith, array2F));
+        sa.bucketSort(array3F, n);
+        assertEquals(0, Arrays.compare(array3FToCompareWith, array3F));
+
+         */
     }
 }

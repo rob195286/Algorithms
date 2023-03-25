@@ -1,6 +1,6 @@
 package data_structures;
 
-import utilitarian.ExceptionsMessages;
+import util.ExceptionsMessages;
 import java.security.InvalidKeyException;
 
 
@@ -8,49 +8,49 @@ public class MaxPriorityQueue {
     private final BinaryMaxHeap binaryMaxHeap;
 
     public MaxPriorityQueue(int[] arraytoConvertInMaxPriorityQueue){
-        this.binaryMaxHeap = new BinaryMaxHeap(arraytoConvertInMaxPriorityQueue);
+        binaryMaxHeap = new BinaryMaxHeap(arraytoConvertInMaxPriorityQueue);
     }
 
     public void enqueue(int keyToInsert) throws InvalidKeyException {
-        this.binaryMaxHeap.addKey(keyToInsert);
-        this.increaseKey(this.binaryMaxHeap.getSize() - 1, keyToInsert);
+        binaryMaxHeap.addKey(keyToInsert);
+        increaseKey(this.binaryMaxHeap.getSize() - 1, keyToInsert);
     }
     public int extractMax(){
         int max = this.maximum();
-        this.binaryMaxHeap.replaceNodeAtIndexBy(0, this.binaryMaxHeap.getNodeAtIndex(this.binaryMaxHeap.getSize() - 1));
-        this.binaryMaxHeap.decrementSize();
-        this.binaryMaxHeap.maxHeapify(0);
+        binaryMaxHeap.replaceNodeAtIndexBy(0, binaryMaxHeap.getNodeAtIndex(binaryMaxHeap.getSize() - 1));
+        binaryMaxHeap.decrementSize();
+        binaryMaxHeap.maxHeapify(0);
         return max;
     }
     public void increaseKey(int nodeIndex, int key) throws InvalidKeyException {
-        int nodeToIncreaseValue = this.binaryMaxHeap.getNodeAtIndex(nodeIndex);
+        int nodeToIncreaseValue = binaryMaxHeap.getNodeAtIndex(nodeIndex);
         if(key < nodeToIncreaseValue)
             throw new InvalidKeyException(ExceptionsMessages.KEY_UNDER_CURRENT_VALUE + nodeToIncreaseValue + ", " + nodeIndex + ", " + key);
-        this.binaryMaxHeap.replaceNodeAtIndexBy(nodeIndex, key);
-        int parentIndex = this.binaryMaxHeap.parent(nodeIndex);
-        nodeToIncreaseValue = this.binaryMaxHeap.getNodeAtIndex(nodeIndex);
-        int parentNodeValue = this.binaryMaxHeap.getNodeAtIndex(parentIndex);
+        binaryMaxHeap.replaceNodeAtIndexBy(nodeIndex, key);
+        int parentIndex = binaryMaxHeap.parent(nodeIndex);
+        nodeToIncreaseValue = binaryMaxHeap.getNodeAtIndex(nodeIndex);
+        int parentNodeValue = binaryMaxHeap.getNodeAtIndex(parentIndex);
         int i = nodeIndex;
         while (i > 0 && parentNodeValue < nodeToIncreaseValue){
-            parentNodeValue = this.binaryMaxHeap.getNodeAtIndex(this.binaryMaxHeap.parent(i));
-            this.binaryMaxHeap.replaceNodeAtIndexBy(this.binaryMaxHeap.parent(i), nodeToIncreaseValue);
-            this.binaryMaxHeap.replaceNodeAtIndexBy(i, parentNodeValue);
-            i = this.binaryMaxHeap.parent(i);
+            parentNodeValue = binaryMaxHeap.getNodeAtIndex(binaryMaxHeap.parent(i));
+            binaryMaxHeap.replaceNodeAtIndexBy(binaryMaxHeap.parent(i), nodeToIncreaseValue);
+            binaryMaxHeap.replaceNodeAtIndexBy(i, parentNodeValue);
+            i = binaryMaxHeap.parent(i);
         }
     }
     public int maximum(){
-        if (this.binaryMaxHeap.getSize() < 1)
+        if (binaryMaxHeap.getSize() < 1)
             throw new ArrayIndexOutOfBoundsException(ExceptionsMessages.INDEX_NODE_OUT_OF_BOUND + 0);
-        return this.binaryMaxHeap.getNodeAtIndex(0);
+        return binaryMaxHeap.getNodeAtIndex(0);
     }
     public int getSize(){
-        return this.binaryMaxHeap.getSize();
+        return binaryMaxHeap.getSize();
     }
-    public int getLength(){return this.binaryMaxHeap.getLength();}
+    public int getLength(){return binaryMaxHeap.getLength();}
     @Override
     public String toString() {
         return "MaxPriorityQueue{" +
-                "binaryMaxHeap=" + this.binaryMaxHeap +
+                "binaryMaxHeap=" + binaryMaxHeap +
                 '}';
     }
 }

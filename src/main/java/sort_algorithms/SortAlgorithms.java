@@ -2,10 +2,11 @@ package sort_algorithms;
 
 
 import data_structures.BinaryMaxHeap;
-
+import java.util.ArrayList;
 import java.util.Arrays;
 
-public class SortAlgorithms {
+
+public final class SortAlgorithms {
     public void insertionSort(int[] arrayToSort){
         int value;
         int j;
@@ -20,7 +21,7 @@ public class SortAlgorithms {
         }
     }
     public void mergeSort(int[] arrayToSort){
-        this.mergeSort(arrayToSort, 0, arrayToSort.length-1);
+        mergeSort(arrayToSort, 0, arrayToSort.length-1);
     }
     private void mergeSort(int[] arrayToSort, int start, int end){
         if(start >= end)
@@ -82,8 +83,8 @@ public class SortAlgorithms {
         // todo : faire un une condition qui enlève les doublons
         int[] B = new int[arrayToSort.length];
         int[] C = new int[++highestValue];           // Array contenant le nombre d'éléments inférieur à son indexe, et donc sa place dans B
-        for (int i = 0; i < arrayToSort.length; i++){
-            C[arrayToSort[i]]++;                    // Incrémente le nombre i à son indexe à chaque fois qu'il est trouvé.
+        for (int j : arrayToSort) {
+            C[j]++;                                 // Incrémente le nombre i à son indexe à chaque fois qu'il est trouvé.
         }
         for (int i = 1; i < highestValue; i++){
             C[i] += C[i-1];                   // Place dans C la quantité de nombre (par rapport à son index)
@@ -94,5 +95,26 @@ public class SortAlgorithms {
             C[arrayToSort[i]]--;
         }
         return B;
+    }
+    public double[] bucketSort(double[] arrayToSort, int n){
+        ArrayList<Double>[] B = new ArrayList[10];
+        for (int i = 0; i < n; i++){
+            B[i] = new ArrayList();
+        }
+        for (int i = 0; i < arrayToSort.length; i++){
+            int bucketListIndex = (int)Math.floor(arrayToSort[i] * n);
+            B[bucketListIndex].add(arrayToSort[i]);
+        }
+        System.out.println(Arrays.toString(B));
+        for (int i = 0; i < n; i++){
+            ArrayList<Double> x = B[i];
+           // this.insertionSort(x);
+          //  System.out.println(Arrays.toString(B[i].toArray()));
+            Object[] e = x.toArray();
+           // double[] ee = (double[])e;
+           // System.out.println(Arrays.toString(x.toArray()));
+        }
+       // System.out.println(Arrays.toString(B));
+        return new double[]{};
     }
 }

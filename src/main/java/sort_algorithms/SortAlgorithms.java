@@ -2,28 +2,31 @@ package sort_algorithms;
 
 
 import data_structures.BinaryMaxHeap;
+import data_structures.Holder;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
 
-public final class SortAlgorithms {
-    public void insertionSort(int[] arrayToSort){
+public class SortAlgorithms {
+    public static void insertionSort(int[] holder){
         int value;
         int j;
-        for (int i = 1; i < arrayToSort.length; i++){
-            value = arrayToSort[i];
+        for (int i = 1; i < holder.length; i++){
+          //  container.
+            value = holder[i];
             j = i-1;
-            while(j > -1 && arrayToSort[j] > value){
-                arrayToSort[j+1] = arrayToSort[j]; // Echange les valeurs si celle de gauche dans l'array est <.
+            while(j > -1 && holder[j] > value){
+                holder[j+1] = holder[j]; // Echange les valeurs si celle de gauche dans l'array est <.
                 j--;                               // Désincrémente j pour pouvoir parcourir l'array vers la gauche
             }                                      //   et insérer la valeur en cours de traitement à son bon emplacement.
-            arrayToSort[j+1] = value;   // Ajoute la valeur en cours de traitement une case avant la dernière traitée.
+            holder[j+1] = value;   // Ajoute la valeur en cours de traitement une case avant la dernière traitée.
         }
     }
-    public void mergeSort(int[] arrayToSort){
+    public static void mergeSort(int[] arrayToSort){
         mergeSort(arrayToSort, 0, arrayToSort.length-1);
     }
-    private void mergeSort(int[] arrayToSort, int start, int end){
+    private static void mergeSort(int[] arrayToSort, int start, int end){
         if(start >= end)
             return;                                   // Termine l'appel récursif si on a un array dont la taille est 1.
         int middle = (start + end)/2;
@@ -69,7 +72,7 @@ public final class SortAlgorithms {
             k++;
         }
     }
-    public void heapSort(int[] arrayToSort, int arraySizeToSort){
+    public static void heapSort(int[] arrayToSort, int arraySizeToSort){
         BinaryMaxHeap bh = new BinaryMaxHeap(arrayToSort);
         for (int i = arraySizeToSort - 1; i >= 1; i--){  // todo : vérifer si on ne peut pas encapsuler l'échange de noeuds ainsi que le "decrementSize"
             int tempNode = bh.getNodeAtIndex(0);
@@ -79,7 +82,7 @@ public final class SortAlgorithms {
             bh.maxHeapify(0);
         }
     }
-    public int[] countingSort(int[] arrayToSort, int highestValue){
+    public static int[] countingSort(int[] arrayToSort, int highestValue){
         // todo : faire un une condition qui enlève les doublons
         int[] B = new int[arrayToSort.length];
         int[] C = new int[++highestValue];           // Array contenant le nombre d'éléments inférieur à son indexe, et donc sa place dans B
@@ -96,7 +99,7 @@ public final class SortAlgorithms {
         }
         return B;
     }
-    public double[] bucketSort(double[] arrayToSort, int n){
+    public static double[] bucketSort(double[] arrayToSort, int n){
         ArrayList<Double>[] B = new ArrayList[10];
         for (int i = 0; i < n; i++){
             B[i] = new ArrayList();

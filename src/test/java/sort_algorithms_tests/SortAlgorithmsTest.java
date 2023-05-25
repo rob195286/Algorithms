@@ -16,7 +16,6 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class SortAlgorithmsTest {
-    SortAlgorithms sa = new SortAlgorithms();
     int arraySize = 100000;
     Random randInt = new Random();
     int[] array1;
@@ -67,11 +66,11 @@ class SortAlgorithmsTest {
 
     @Test
     void insertionSort() {
-        sa.insertionSort(array1);
+        SortAlgorithms.insertionSort(array1);
         assertEquals(0, Arrays.compare(array1, array1ToCompareWith));
-        sa.insertionSort(array2);
+        SortAlgorithms.insertionSort(array2);
         assertEquals(0, Arrays.compare(array2, array2ToCompareWith));
-        sa.insertionSort(array3);
+        SortAlgorithms.insertionSort(array3);
         assertEquals(0, Arrays.compare(array3, array3ToCompareWith));
     }
 
@@ -82,32 +81,32 @@ class SortAlgorithmsTest {
         System.arraycopy(array2, 0, array1_2, array1.length, array2.length);
         array1_2ToCompareWith = array1_2.clone();
         Arrays.sort(array1_2ToCompareWith);
-        sa.mergeSort(array1_2);
+        SortAlgorithms.mergeSort(array1_2);
         assertEquals(0, Arrays.compare(array1_2ToCompareWith, array1_2));
-        sa.mergeSort(array3);
+        SortAlgorithms.mergeSort(array3);
         assertEquals(0, Arrays.compare(array3ToCompareWith, array3));
     }
 
     @Test
     void heapSort() {
-        sa.heapSort(array1, array1.length);
+        SortAlgorithms.heapSort(array1, array1.length);
         assertEquals(0, Arrays.compare(array1ToCompareWith, array1));
-        sa.heapSort(array2, array2.length);
+        SortAlgorithms.heapSort(array2, array2.length);
         assertEquals(0, Arrays.compare(array2ToCompareWith, array2));
-        sa.heapSort(array3, array3.length);
+        SortAlgorithms.heapSort(array3, array3.length);
         assertEquals(0, Arrays.compare(array3ToCompareWith, array3));
     }
 
     @Test
     void countingSort() {
         int heighestVal = array1ToCompareWith[array1ToCompareWith.length-1];
-        assertEquals(0, Arrays.compare(array1ToCompareWith, sa.countingSort(array1, heighestVal)));
+        assertEquals(0, Arrays.compare(array1ToCompareWith, SortAlgorithms.countingSort(array1, heighestVal)));
 
         heighestVal = array2ToCompareWith[array2ToCompareWith.length-1];
-        assertEquals(0, Arrays.compare(array2ToCompareWith, sa.countingSort(array2, heighestVal)));
+        assertEquals(0, Arrays.compare(array2ToCompareWith, SortAlgorithms.countingSort(array2, heighestVal)));
 
         heighestVal = array3ToCompareWith[array3ToCompareWith.length-1];
-        assertEquals(0, Arrays.compare(array3ToCompareWith, sa.countingSort(array3, heighestVal)));
+        assertEquals(0, Arrays.compare(array3ToCompareWith, SortAlgorithms.countingSort(array3, heighestVal)));
     }
 
     @Test
